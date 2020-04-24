@@ -6,12 +6,6 @@ variable "location" {
   }
 }
 
-variable "cluster_provider" {
-  type        = string
-  default     = "gke"
-  description = "Cluster provider, can be gke or do"
-}
-
 variable "cluster_name" {
   type        = string
   description = "Name of cluster."
