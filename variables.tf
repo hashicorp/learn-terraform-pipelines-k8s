@@ -1,9 +1,7 @@
-variable "location" {
-  type        = map
-  description = "Map containing provider and the region to deploy clusters."
-  default = {
-    gcp = "us-central1"
-  }
+variable "region" {
+  type        = string
+  default     = "us-central1"
+  description = "GCP region to deploy clusters."
 }
 
 variable "cluster_name" {
