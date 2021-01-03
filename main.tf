@@ -1,6 +1,6 @@
 terraform {
   backend "remote" {
-    organization = "hashicorp-learn"
+    organization = "cloudformationstack"
 
     workspaces {
       name = "learn-terraform-pipelines-k8s"
