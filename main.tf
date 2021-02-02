@@ -6,10 +6,19 @@ terraform {
       name = "rachel-s-k8s"
     }
   }
+required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 3.55"
+    }
 }
 
+required_version = "~> 0.14"
+}
+
+
+
 provider "google" {
-  version = "3.10.0"
   project = var.google_project
   region  = var.region
 }
