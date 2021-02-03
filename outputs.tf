@@ -35,5 +35,5 @@ output "project_id" {
 }
 
 output "region" {
-  value = google_compute_zones.available.region
+  value = data.google_compute_zones.available.region
 }
