@@ -29,3 +29,11 @@ output "enable_consul_and_vault" {
 output "kubeconfig" {
   value = data.template_file.kubeconfig.rendered
 }
+
+output "project_id" {
+  value = google_container_cluster.engineering.project
+}
+
+output "region" {
+  value = data.google_compute_zones.available.region
+}
