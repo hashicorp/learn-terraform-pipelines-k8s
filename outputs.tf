@@ -1,39 +1,44 @@
-output "cluster" {
-  value = google_container_cluster.engineering.name
+output "aws_region" {
+  description = "AWS region for all resources"
+  value       = var.aws_region
 }
 
-output "host" {
-  value     = google_container_cluster.engineering.endpoint
-  sensitive = true
+output "cluster" {
+  description = "Name of the EKS cluster"
+  value       = data.aws_eks_cluster.cluster.id
+}
+
+output "endpoint" {
+  description = "URL of the kubernetes endpoint"
+  value       = data.aws_eks_cluster.cluster.endpoint
+  sensitive   = true
 }
 
 output "cluster_ca_certificate" {
-  value     = base64decode(google_container_cluster.engineering.master_auth.0.cluster_ca_certificate)
-  sensitive = true
-}
-
-output "username" {
-  value     = google_container_cluster.engineering.master_auth.0.username
-  sensitive = true
-}
-
-output "password" {
-  value     = google_container_cluster.engineering.master_auth.0.password
-  sensitive = true
+  description = "EKS cluster's CA certificate"
+  value       = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
+  sensitive   = true
 }
 
 output "enable_consul_and_vault" {
-  value = var.enable_consul_and_vault
+  description = "Boolean flag to enable consul and vault"
+  value       = var.enable_consul_and_vault
 }
 
 output "kubeconfig" {
-  value = data.template_file.kubeconfig.rendered
+  description = "Kubeconfig file for cluster management"
+  value       = data.template_file.kubeconfig.rendered
+  sensitive   = true
 }
 
-output "project_id" {
-  value = google_container_cluster.engineering.project
+# Requires aws-iam-authenticator
+output "module_kubeconfig" {
+  description = "Kubeconfig file for cluster management"
+  value       = module.eks_cluster.kubeconfig
+  sensitive   = true
 }
 
-output "region" {
-  value = data.google_compute_zones.available.region
+output "config_map_aws_auth" {
+  description = "Config map for AWS auth"
+  value       = module.eks_cluster.config_map_aws_auth
 }
