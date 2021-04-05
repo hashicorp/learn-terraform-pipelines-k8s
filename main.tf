@@ -77,7 +77,7 @@ module "eks_cluster" {
   subnets = module.vpc.private_subnets
 
   ## FIXME: Troubleshooting
-#  cluster_endpoint_private_access = true
+  // cluster_endpoint_private_access = true
 
   tags = {
     Environment = "training"
@@ -86,7 +86,7 @@ module "eks_cluster" {
   worker_groups = [
     {
       name                          = "worker-group-one"
-      instance_type                 = "t2.micro"
+      instance_type                 = "t2.small"
       root_volume_type              = "gp2"
       asg_desired_capacity          = 3
       asg_max_size                  = 5
@@ -124,14 +124,5 @@ provider "kubernetes" {
   host                   = data.aws_eks_cluster.cluster.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
 
-  exec {
-    api_version = "client.authentication.k8s.io/v1alpha1"
-    command     = "aws"
-    args = [
-      "eks",
-      "get-token",
-      "--cluster-name",
-      data.aws_eks_cluster.cluster.name
-    ]
-  }
+  token                  = data.aws_eks_cluster_auth.cluster.token
 }
