@@ -83,7 +83,7 @@ module "eks_cluster" {
   worker_groups = [
     {
       name                          = "worker-group-one"
-      instance_type                 = "t2.micro"
+      instance_type                 = "t2.small"
       root_volume_type              = "gp2"
       asg_desired_capacity          = 3
       asg_max_size                  = 5
