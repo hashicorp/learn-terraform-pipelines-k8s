@@ -76,9 +76,6 @@ module "eks_cluster" {
   vpc_id  = module.vpc.vpc_id
   subnets = module.vpc.private_subnets
 
-  ## FIXME: Troubleshooting
-#  cluster_endpoint_private_access = true
-
   tags = {
     Environment = "training"
   }
