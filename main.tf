@@ -8,9 +8,8 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "3.34.0"
+      version = "3.35.0"
     }
-
     kubernetes = {
       source  = "hashicorp/kubernetes"
       version = "2.0.3"
@@ -100,7 +99,6 @@ data "aws_eks_cluster_auth" "cluster" {
   name = module.eks_cluster.cluster_id
 }
 
-# Does not require aws-iam-authenticator
 data "template_file" "kubeconfig" {
   template = file("${path.module}/kubeconfig-template.yaml")
 
@@ -121,14 +119,5 @@ provider "kubernetes" {
   host                   = data.aws_eks_cluster.cluster.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
 
-  exec {
-    api_version = "client.authentication.k8s.io/v1alpha1"
-    command     = "aws"
-    args = [
-      "eks",
-      "get-token",
-      "--cluster-name",
-      data.aws_eks_cluster.cluster.name
-    ]
-  }
+  token = data.aws_eks_cluster_auth.cluster.token
 }

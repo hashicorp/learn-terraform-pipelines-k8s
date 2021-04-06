@@ -25,6 +25,7 @@ output "enable_consul_and_vault" {
   value       = var.enable_consul_and_vault
 }
 
+# Does not require aws-iam-authenticator
 output "kubeconfig" {
   description = "Kubeconfig file for cluster management"
   value       = data.template_file.kubeconfig.rendered
