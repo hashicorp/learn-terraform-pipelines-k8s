@@ -5,6 +5,7 @@ terraform {
   #     name = "learn-terraform-pipelines-k8s"
   #   }
   # }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
