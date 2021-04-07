@@ -6,12 +6,12 @@ variable "aws_region" {
 
 variable "user_name" {
   type        = string
-  default     = "admin"
-  description = "Username for EKS cluster"
+  default     = "hashicorp"
+  description = "Username for EKS cluster administration"
 }
 
 variable "enable_consul_and_vault" {
   type        = bool
-  default     = true
+  default     = false
   description = "Enable consul and vault for the secrets cluster"
 }

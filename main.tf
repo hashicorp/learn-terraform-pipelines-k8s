@@ -1,10 +1,10 @@
 terraform {
-  # backend "remote" {
-  #   organization = "hashicorp-learn"
-  #   workspaces {
-  #     name = "learn-terraform-pipelines-k8s"
-  #   }
-  # }
+  backend "remote" {
+    organization = "hashicorp-learn"
+    workspaces {
+      name = "learn-terraform-pipelines-k8s"
+    }
+  }
 
   required_providers {
     aws = {
@@ -120,13 +120,12 @@ data "template_file" "kubeconfig" {
   }
 }
 
-# The Kubernetes provider is included in this file so the EKS module can
-# complete successfully. Otherwise, it throws an error when creating
-# `kubernetes_config_map.aws_auth`. This configuration does not provision
-# any kubernetes resources on the EKS cluster.
+# The Kubernetes provider is included so the EKS module can complete
+# successfully. Otherwise, it throws an error when creating
+# `kubernetes_config_map.aws_auth`. This configuration does not provision any
+# kubernetes resources on the EKS cluster.
 provider "kubernetes" {
   host                   = data.aws_eks_cluster.cluster.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
-
-  token = data.aws_eks_cluster_auth.cluster.token
+  token                  = data.aws_eks_cluster_auth.cluster.token
 }
