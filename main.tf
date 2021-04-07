@@ -49,6 +49,10 @@ module "vpc" {
   enable_nat_gateway   = true
   single_nat_gateway   = true
   enable_dns_hostnames = true
+
+  tags = {
+    Environment = "hc-workshop"
+  }
 }
 
 resource "aws_security_group" "worker_group_mgmt_one" {
@@ -63,6 +67,10 @@ resource "aws_security_group" "worker_group_mgmt_one" {
     cidr_blocks = [
       "10.0.0.0/8",
     ]
+  }
+
+  tags = {
+    Environment = "hc-workshop"
   }
 }
 

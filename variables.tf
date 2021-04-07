@@ -6,8 +6,8 @@ variable "aws_region" {
 
 variable "user_name" {
   type        = string
-  default     = "leaf"
-  description = "Username for EKS clusters"
+  default     = "admin"
+  description = "Username for EKS cluster"
 }
 
 variable "enable_consul_and_vault" {
