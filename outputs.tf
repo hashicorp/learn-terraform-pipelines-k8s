@@ -3,7 +3,7 @@ output "aws_region" {
   value       = var.aws_region
 }
 
-output "cluster" {
+output "cluster_id" {
   description = "Name of the EKS cluster"
   value       = data.aws_eks_cluster.cluster.id
 }
