@@ -8,8 +8,8 @@ output "host" {
 }
 
 output "access_token" {
-  value      = data.google_client_config.default.access_token
-  sensitive  = true
+  value     = data.google_client_config.default.access_token
+  sensitive = true
 }
 
 output "enable_consul_and_vault" {
