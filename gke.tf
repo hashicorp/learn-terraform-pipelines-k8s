@@ -1,5 +1,7 @@
 data "google_compute_zones" "available" {}
 
+data "google_client_config" "default" {}
+
 resource "google_container_cluster" "engineering" {
   name     = var.cluster_name
   location = data.google_compute_zones.available.names.0
@@ -9,7 +11,7 @@ resource "google_container_cluster" "engineering" {
   # node pool and immediately delete it.
   remove_default_node_pool = true
   initial_node_count       = 1
-  
+
   ip_allocation_policy {}
 }
 
@@ -40,8 +42,6 @@ data "template_file" "kubeconfig" {
 
   vars = {
     cluster_name    = google_container_cluster.engineering.name
-    user_name       = google_container_cluster.engineering.master_auth[0].username
-    user_password   = google_container_cluster.engineering.master_auth[0].password
     endpoint        = google_container_cluster.engineering.endpoint
     cluster_ca      = google_container_cluster.engineering.master_auth[0].cluster_ca_certificate
     client_cert     = google_container_cluster.engineering.master_auth[0].client_certificate
