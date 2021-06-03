@@ -27,3 +27,8 @@ output "project_id" {
 output "region" {
   value = data.google_compute_zones.available.region
 }
+
+output "cluster_ca_certificate" {
+  value     = base64decode(google_container_cluster.engineering.master_auth.0.cluster_ca_certificate)
+  sensitive = true
+}
