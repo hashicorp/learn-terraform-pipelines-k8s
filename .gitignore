@@ -35,3 +35,4 @@ terraform
 
 *.json
 .DS_Store
+.terraform*
