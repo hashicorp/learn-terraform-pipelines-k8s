@@ -15,17 +15,6 @@ variable "google_project" {
   description = "Google Project to deploy cluster"
 }
 
-variable "username" {
-  type        = string
-  default     = "admin"
-  description = "Username for GKE clusters"
-}
-
-variable "password" {
-  type        = string
-  description = "Password for GKE clusters"
-}
-
 variable "enable_consul_and_vault" {
   type        = bool
   default     = false
