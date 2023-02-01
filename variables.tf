@@ -10,6 +10,11 @@ variable "cluster_name" {
   description = "Name of cluster."
 }
 
+variable "google_project" {
+  type        = string
+  description = "Google Project to deploy cluster"
+}
+
 variable "enable_consul_and_vault" {
   type        = bool
   default     = false
