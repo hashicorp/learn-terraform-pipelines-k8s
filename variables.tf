@@ -14,9 +14,3 @@ variable "google_project" {
   type        = string
   description = "Google Project to deploy cluster"
 }
-
-variable "enable_consul_and_vault" {
-  type        = bool
-  default     = false
-  description = "Enable consul and vault for the secrets cluster"
-}

@@ -18,7 +18,7 @@ resource "google_container_node_pool" "engineering_preemptible_nodes" {
   cluster  = google_container_cluster.engineering.name
   location = data.google_compute_zones.available.names.0
 
-  node_count = var.enable_consul_and_vault ? 5 : 3
+  node_count = 3
 
   node_config {
     preemptible  = true
