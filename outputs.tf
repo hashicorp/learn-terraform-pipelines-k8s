@@ -12,22 +12,14 @@ output "cluster_ca_certificate" {
   sensitive = true
 }
 
-output "username" {
-  value     = google_container_cluster.engineering.master_auth.0.username
+output "client_certificate" {
+  value     = base64decode(google_container_cluster.engineering.master_auth.0.client_certificate)
   sensitive = true
 }
 
-output "password" {
-  value     = google_container_cluster.engineering.master_auth.0.password
+output "client_key" {
+  value     = base64decode(google_container_cluster.engineering.master_auth.0.client_key)
   sensitive = true
-}
-
-output "enable_consul_and_vault" {
-  value = var.enable_consul_and_vault
-}
-
-output "kubeconfig" {
-  value = data.template_file.kubeconfig.rendered
 }
 
 output "project_id" {
