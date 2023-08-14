@@ -22,10 +22,6 @@ output "client_key" {
   sensitive = true
 }
 
-output "enable_consul_and_vault" {
-  value = var.enable_consul_and_vault
-}
-
 output "project_id" {
   value = google_container_cluster.engineering.project
 }
