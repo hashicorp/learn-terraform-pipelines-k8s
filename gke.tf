@@ -1,5 +1,10 @@
 data "google_compute_zones" "available" {}
 
+data "google_container_engine_versions" "gke_version" {
+  location       = var.region
+  version_prefix = "1.27."
+}
+
 resource "google_container_cluster" "engineering" {
   name     = var.cluster_name
   location = data.google_compute_zones.available.names.0
@@ -18,6 +23,7 @@ resource "google_container_node_pool" "engineering_preemptible_nodes" {
   cluster  = google_container_cluster.engineering.name
   location = data.google_compute_zones.available.names.0
 
+  version    = data.google_container_engine_versions.gke_version.release_channel_latest_version["STABLE"]
   node_count = var.enable_consul_and_vault ? 5 : 3
 
   node_config {
