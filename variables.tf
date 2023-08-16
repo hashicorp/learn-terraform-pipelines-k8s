@@ -17,3 +17,9 @@ variable "google_project" {
   type        = string
   description = "Google Project to deploy cluster"
 }
+
+variable "node_count" {
+  type        = number
+  description = "Number of nodes in the node pool"
+  default     = 3
+}
